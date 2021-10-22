@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+  <div class="row justify-content-center">
+    <div class="col-6">
+      <div class="card">
+        <div class="card-body">
+          <h2>Log in</h2>
+          <form method="post" novalidate>
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button type="submit" class="btn btn-primary">Log in</button><br></br>
+            <a href="{% url 'dashboard' %}" class="btn btn-link">Back to dashboard</a>
+			<a href="{% url 'social:begin' 'github' %}" class="btn btn-link">Login with GitHub</a>
+            <a href="{% url 'password_reset' %}" class="btn btn-link">Forgot your password?</a>
+            <a href="{% url 'register' %}" class="btn btn-link">Register</a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+{% endblock %}
