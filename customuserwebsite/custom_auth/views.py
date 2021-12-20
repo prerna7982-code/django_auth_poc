@@ -14,13 +14,15 @@ class SignupView(FormView):
     success_url = reverse_lazy('custom_auth:dashboard')
 
     def form_valid(self, form):
-        """ process user signup"""
+        """ process user signup
+            The default implementation for form_valid() simply redirects to the success_url.
+        """
         user = form.save(commit=False)
+        user.set_password(user.password)
         user.save()
         login(self.request, user)
         if user is not None:
             return HttpResponseRedirect(self.success_url)
-
         return super().form_valid(form)
 
 
